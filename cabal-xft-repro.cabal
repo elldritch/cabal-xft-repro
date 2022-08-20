@@ -1,0 +1,10 @@
+cabal-version: 3.0
+name:          cabal-xft-repro
+version:       0.0.1.0
+
+executable cabal-xft-repro
+  hs-source-dirs: cmd
+  main-is:        Main.hs
+  build-depends:
+    , base
+    , xmobar ^>=0.44.2
