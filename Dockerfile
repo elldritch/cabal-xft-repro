@@ -1,10 +1,15 @@
-FROM debian:buster-20220801
+FROM archlinux:base-20220814.0.74430
 
-RUN apt-get update
-RUN apt-get install -y build-essential curl libffi-dev libffi6 libgmp-dev libgmp10 libncurses-dev libncurses5 libtinfo5
+RUN pacman -Sy
+
+# Install ghcup
+RUN pacman -S --noconfirm curl gcc gmp make ncurses coreutils xz
 RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 ENV PATH="/root/.ghcup/bin:${PATH}"
 RUN ghcup install cabal 3.8.1.0
+
+# Install dependencies for cabal-xft-repro
+RUN pacman -S --noconfirm pkgconf zlib libx11 libxext libxinerama libxrandr libxss pango
 
 WORKDIR /root
 
